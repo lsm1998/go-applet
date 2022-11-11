@@ -1,5 +1,5 @@
 module applet
 
-go 1.19
+go 1.17
 
-require github.com/jony-lee/go-progress-bar v0.0.3
+require github.com/kyokomi/emoji/v2 v2.2.10
