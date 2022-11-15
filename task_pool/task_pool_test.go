@@ -7,7 +7,7 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	taskPool := New(2)
+	taskPool := NewChannelTaskPool(2)
 	go func() {
 		for i := 0; i < 10; i++ {
 			taskPool.Submit(func() {
@@ -18,4 +18,5 @@ func TestNew(t *testing.T) {
 	}()
 	time.Sleep(time.Second)
 	taskPool.Finish()
+	time.Sleep(2 * time.Second)
 }
