@@ -35,7 +35,7 @@ func (p *progressBar) Percent() float64 {
 }
 
 func (p *progressBar) Done(val float64) bool {
-	if p.current < p.total {
+	if p.current+val < p.total {
 		p.current += val
 		return false
 	} else if p.done {
@@ -108,7 +108,7 @@ func WithTail(tail string) BarOption {
 	}
 }
 
-// NewProgressBar
+// NewProgressBar new
 func NewProgressBar(total float64, opts ...BarOption) Bar {
 	bar := &progressBar{
 		total:        total,
