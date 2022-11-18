@@ -1,7 +1,9 @@
 package copy_progress_bar
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 )
@@ -26,6 +28,7 @@ type progressBar struct {
 	cancelC      chan struct{} // 取消channel
 	ticker       *time.Ticker
 	done         bool
+	*bufio.Writer
 }
 
 type BarOption = func(*progressBar)
@@ -59,7 +62,13 @@ func (p *progressBar) getEta(now time.Time) string {
 
 func (p *progressBar) tryProgressString() {
 	if p.current < p.total {
-		fmt.Print(p.progressString())
+		//if _, err := p.Writer.WriteString(p.progressString()); err != nil {
+		//	panic(err)
+		//}
+		//if err := p.Flush(); err != nil {
+		//	panic(err)
+		//}
+		fmt.Printf("%s", p.progressString())
 	}
 }
 
@@ -119,6 +128,7 @@ func NewProgressBar(total float64, opts ...BarOption) Bar {
 		begin:        time.Now(),
 		cancelC:      make(chan struct{}),
 		tail:         ">",
+		Writer:       bufio.NewWriter(os.Stdout),
 	}
 	for _, opt := range opts {
 		opt(bar)

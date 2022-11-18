@@ -2,20 +2,18 @@ package copy_progress_bar
 
 import (
 	"fmt"
-	"runtime"
 	"testing"
 	"time"
 )
 
 func TestNewFileCopyProgressBar(t *testing.T) {
-	fmt.Println(runtime.GOMAXPROCS(0))
-	//fmt.Println("Done!!!")
+	fmt.Println("Done!!!")
 	//printEmoji()
 
 	newProgressBar := NewProgressBar(100)
 
 	for i := 0; i < 100; i++ {
-		time.Sleep(time.Second / 50)
+		time.Sleep(time.Second / 10)
 		newProgressBar.Done(1)
 	}
 
