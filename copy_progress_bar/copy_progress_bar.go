@@ -1,4 +1,4 @@
-package copy_progress_bar
+package main
 
 import (
 	"errors"

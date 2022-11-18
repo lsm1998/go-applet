@@ -1,4 +1,4 @@
-package copy_progress_bar
+package main
 
 type Copy interface {
 	Copy(src, dist string) error
